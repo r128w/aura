@@ -2,7 +2,7 @@ const balls = {
         list:[],
         init:function(){
             balls.list = []
-            for(var i = 0; i  < 100; i ++){
+            for(var i = 0; i  < 300; i ++){
                 balls.list.push(
                     new Ball(Math.random()*c.width, Math.random()*c.height, 3*(Math.random()-0.5), 3*(Math.random()-0.5))
                 )
@@ -37,6 +37,12 @@ class Ball {
         if(this.x < this.r){this.vx*=-1;this.x=this.r}
         if(this.y > c.height - this.r){this.vy*=-1;this.y=c.height - this.r}
         if(this.y < this.r){this.vy*=-1;this.y=this.r}
+
+        if(Math.abs(this.x - player.x) < this.r + player.r){
+            if(Math.abs(this.y - player.y) < this.r + player.r){
+                player.hitTimer = 1
+            }
+        }
     }
     render(){
         ctx.fillStyle="#ff0000"

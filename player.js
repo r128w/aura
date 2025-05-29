@@ -2,9 +2,12 @@ const player = {
     x:0,y:0,vx:0,vy:0,
     r:10,
     input:{w:false,a:false,s:false,d:false},
+    hitTimer:0,
     iterate:function(dtime){
         this.x+=this.vx*dtime
         this.y+=this.vy*dtime
+
+        this.hitTimer-=dtime
         
         const speed = 3
         const acc = 0.2
@@ -27,6 +30,11 @@ const player = {
     render:function(){
         ctx.fillStyle = "#000000"
         ctx.fillRect(this.x-this.r, this.y-this.r, this.r*2, this.r*2)
+        if(this.hitTimer>0){
+            const alpha = Math.trunc(this.hitTimer*300)
+            ctx.fillStyle="#ff0000" + (alpha < 16 ? "0" + alpha.toString(16) : alpha.toString(16))
+            ctx.fillRect(0,0,c.width,c.height)
+        }
     }
 }
 
