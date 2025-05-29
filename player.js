@@ -1,5 +1,5 @@
 const player = {
-    x:0,y:0,vx:0,vy:0,
+    x:200,y:200,vx:0,vy:0,
     r:10,
     input:{w:false,a:false,s:false,d:false},
     hitTimer:0,
