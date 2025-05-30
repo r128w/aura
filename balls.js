@@ -4,7 +4,8 @@ const balls = {
             balls.list = []
             for(var i = 0; i  < 300; i ++){
                 balls.list.push(
-                    new Ball(Math.random()*c.width, Math.random()*c.height, 3*(Math.random()-0.5), 3*(Math.random()-0.5))
+                    new Ball(Math.random()*c.width, Math.random()*c.height,
+                     2*(Math.random()-0.5), 2*(Math.random()-0.5))
                 )
             }
         },
@@ -27,7 +28,7 @@ class Ball {
         this.y=y
         this.vx=vx
         this.vy=vy
-        this.r = 5
+        this.r = Math.random() * 5 + (Math.random() < 0.1 ? 10 : 3)
     }
     iterate(dtime){
         this.x+=this.vx*dtime
@@ -40,7 +41,7 @@ class Ball {
 
         if(Math.abs(this.x - player.x) < this.r + player.r){
             if(Math.abs(this.y - player.y) < this.r + player.r){
-                player.hitTimer = 1
+                player.hitTimer = 0
             }
         }
     }
