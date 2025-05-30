@@ -26,6 +26,7 @@ const player = {
         if(this.input.d && this.vx < speed){
             this.vx += acc
         }
+        if(this.x < 0 || this.x > c.width || this.y < 0 || this.y > c.height){this.hit()}
     },
     render:function(){
         ctx.fillStyle = "#000000"
@@ -35,6 +36,12 @@ const player = {
             const alpha = Math.max(0,Math.trunc(20-this.hitTimer))
             ctx.fillStyle="#ff0000" + (alpha < 16 ? "0" + alpha.toString(16) : alpha.toString(16))
             ctx.fillRect(0,0,c.width,c.height)
+    },
+    hit:function(){
+        if(this.hitTimer > 60){
+            fx.list.push(new Num(this.hitTimer/60, this.x, this.y))
+        }
+        this.hitTimer = 0
     }
 }
 

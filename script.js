@@ -38,7 +38,7 @@ const game = {
         game.render()
     },
     render:function(){
-        ctx.fillStyle="#ffffff"
+        ctx.fillStyle="#ffffff66"
         ctx.fillRect(0,0,c.width,c.height)
         balls.render()
         player.render()
