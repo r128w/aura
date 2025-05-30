@@ -2,9 +2,15 @@ const balls = {
         list:[],
         init:function(){
             balls.list = []
-            for(var i = 0; i  < 300; i ++){
+            for(var i = 0; i < 200; i ++){
                 balls.list.push(
                     new Ball(Math.random()*c.width, Math.random()*c.height,
+                     2*(Math.random()-0.5), 2*(Math.random()-0.5))
+                )
+            }
+            for(var i = 0; i  < 10; i ++){
+                balls.list.push(
+                    new Homer(Math.random()*c.width, Math.random()*c.height,
                      2*(Math.random()-0.5), 2*(Math.random()-0.5))
                 )
             }
@@ -41,6 +47,9 @@ class Ball {
 
         if(Math.abs(this.x - player.x) < this.r + player.r){
             if(Math.abs(this.y - player.y) < this.r + player.r){
+                if(player.hitTimer > 60){
+                    fx.list.push(new Num(player.hitTimer/60, player.x, player.y))
+                }
                 player.hitTimer = 0
             }
         }
@@ -49,4 +58,18 @@ class Ball {
         ctx.fillStyle="#ff0000"
         ctx.fillRect(this.x-this.r,this.y-this.r,2*this.r,2*this.r)
     }
+}
+
+class Homer extends Ball {
+    // simp son
+    constructor(x,y,vx,vy){
+        super(x,y,vx,vy)
+    }
+    iterate(dtime){
+        super.iterate(dtime)
+        const factor = 0.00005
+        this.vx += dtime * factor * (player.x - this.x)
+        this.vy += dtime * factor * (player.y - this.y)
+    }
+    render(){super.render()}
 }

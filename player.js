@@ -31,12 +31,8 @@ const player = {
         ctx.fillStyle = "#000000"
         ctx.fillRect(this.x-this.r, this.y-this.r, this.r*2, this.r*2)
 
-        ctx.font="20px monospace"
-        ctx.fillText(Math.trunc(this.hitTimer/60), 20, 40)
-
 
             const alpha = Math.max(0,Math.trunc(20-this.hitTimer))
-            console.log(alpha)
             ctx.fillStyle="#ff0000" + (alpha < 16 ? "0" + alpha.toString(16) : alpha.toString(16))
             ctx.fillRect(0,0,c.width,c.height)
     }

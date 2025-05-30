@@ -34,6 +34,7 @@ const game = {
         game.lastUpdate = Date.now()
         balls.iterate(dtime)
         player.iterate(dtime)
+        fx.iterate(dtime)
         game.render()
     },
     render:function(){
@@ -41,5 +42,6 @@ const game = {
         ctx.fillRect(0,0,c.width,c.height)
         balls.render()
         player.render()
+        fx.render()
     } 
 }
