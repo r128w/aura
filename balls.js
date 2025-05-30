@@ -70,6 +70,11 @@ class Homer extends Ball {
         const factor = 0.00005
         this.vx += dtime * factor * (player.x - this.x)
         this.vy += dtime * factor * (player.y - this.y)
+        this.vx += (Math.random()-0.5)*0.1
+        this.vy += (Math.random()-0.5)*0.1
+
+        this.vx *= 0.995
+        this.vy *= 0.995
     }
     render(){super.render()}
 }
