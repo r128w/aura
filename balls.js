@@ -20,7 +20,7 @@ const balls = {
                 balls.list[i].iterate(dtime)
             }
 
-            if(Math.random()< 0.01){
+            if(Math.random()<0.01){
                 loc = {x:
                     Math.random()*c.width,
                     y:Math.random()*c.height
@@ -36,6 +36,7 @@ const balls = {
                 }
                 this.burst(loc.x, loc.y, Math.trunc(5+Math.random()*10))
             }
+
         },
         render:function(){
             for(var i = 0; i < this.list.length; i ++){
@@ -57,10 +58,10 @@ const balls = {
 
 class Ball {
     constructor(x,y,vx,vy){
-        this.x=x
-        this.y=y
-        this.vx=vx
-        this.vy=vy
+        this.x = x
+        this.y = y
+        this.vx = vx
+        this.vy = vy
         this.r = Math.random() * 5 + (Math.random() < 0.1 ? 10 : 3)
     }
     iterate(dtime){
