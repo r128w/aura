@@ -37,6 +37,11 @@ const balls = {
                 balls.list[i].iterate(dtime)
             }
 
+            if(Math.random() < 0.1){
+                let loc = this.getvalidloc()
+                balls.add(new Ball(loc.x, loc.y, Math.random() * 3, Math.random()* 3))
+            }
+
             if(Math.random()<0.01){
                 let loc = this.getvalidloc()
                 this.burst(loc.x, loc.y, Math.trunc(5+Math.random()*10))
@@ -92,16 +97,24 @@ class Ball {
         this.x+=this.vx*dtime
         this.y+=this.vy*dtime
 
-        if(this.x > c.width - this.r){this.vx*=-1;this.x=c.width - this.r}
-        if(this.x < this.r){this.vx*=-1;this.x=this.r}
-        if(this.y > c.height - this.r){this.vy*=-1;this.y=c.height - this.r}
-        if(this.y < this.r){this.vy*=-1;this.y=this.r}
+        // if(this.x > c.width - this.r){this.vx*=-1;this.x=c.width - this.r}
+        // if(this.x < this.r){this.vx*=-1;this.x=this.r}
+        // if(this.y > c.height - this.r){this.vy*=-1;this.y=c.height - this.r}
+        // if(this.y < this.r){this.vy*=-1;this.y=this.r}
+        if(this.x > c.width + this.r){this.destroy()}
+        if(this.x < -this.r){this.destroy()}
+        if(this.y > c.height + this.r){this.destroy()}
+        if(this.y < -this.r){this.destroy()}
+        
 
         if(Math.abs(this.x - player.x) < this.r + player.r){
             if(Math.abs(this.y - player.y) < this.r + player.r){
                 player.hit()
             }
         }
+    }
+    destroy(){
+        balls.list.splice(balls.list.indexOf(this), 1)
     }
     render(){
         ctx.fillStyle="#ff0000"

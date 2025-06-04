@@ -59,8 +59,8 @@ let lasers = {
         }
     },
     laserAngle:function(spacing, angle){
-        let dx = spacing * Math.cos(angle)
-        let dy = spacing * Math.sin(angle)
+        let dx = spacing/(Math.sin(angle)+0.01)
+        let dy = spacing/(Math.cos(angle)+0.01)
         let nw = (c.width )/dx
         let nh = c.height/dy
         for(var i = 0; i < nw; i ++){
