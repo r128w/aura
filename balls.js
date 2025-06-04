@@ -1,18 +1,35 @@
 const balls = {
         list:[],
+        limit:200,
         init:function(){
             balls.list = []
-            for(var i = 0; i < 100; i ++){
-                balls.list.push(
+            for(var i = 0; i < this.limit; i ++){
+                balls.add(
                     new Ball(Math.random()*c.width, Math.random()*c.height,
                      2*(Math.random()-0.5), 2*(Math.random()-0.5))
                 )
             }
-            for(var i = 0; i  < 10; i ++){
-                balls.list.push(
-                    new Homer(Math.random()*c.width, Math.random()*c.height,
-                     2*(Math.random()-0.5), 2*(Math.random()-0.5))
-                )
+        },
+        getvalidloc:function(){
+            let loc = {x:
+                Math.random()*c.width,
+                y:Math.random()*c.height
+            }
+            const mindist = 300
+            if(Math.abs(loc.x-player.x)<mindist){
+                if(loc.x > player.x){loc.x = player.x + mindist}
+                if(loc.x < player.x){loc.x = player.x - mindist}
+            }
+            if(Math.abs(loc.y-player.y)<mindist){
+                if(loc.y > player.y){loc.y = player.y + mindist}
+                if(loc.y < player.y){loc.y = player.y - mindist}
+            }
+            return loc
+        },
+        add:function(ball){
+            this.list.push(ball)
+            if(this.list.length > this.limit + Math.random()*100){
+                this.list.splice(0,Math.trunc(Math.random()*(this.list.length-this.limit)))
             }
         },
         iterate:function(dtime){
@@ -21,20 +38,14 @@ const balls = {
             }
 
             if(Math.random()<0.01){
-                loc = {x:
-                    Math.random()*c.width,
-                    y:Math.random()*c.height
-                }
-                const mindist = 300
-                if(Math.abs(loc.x-player.x)<mindist){
-                    if(loc.x > player.x){loc.x = player.x + mindist}
-                    if(loc.x < player.x){loc.x = player.x - mindist}
-                }
-                if(Math.abs(loc.y-player.y)<mindist){
-                    if(loc.y > player.y){loc.y = player.y + mindist}
-                    if(loc.y < player.y){loc.y = player.y - mindist}
-                }
+                let loc = this.getvalidloc()
                 this.burst(loc.x, loc.y, Math.trunc(5+Math.random()*10))
+            }
+            if(Math.random() < 0.005){
+                let loc = this.getvalidloc()
+                const an = Math.atan2(player.y-loc.y, player.x-loc.x) + 1.57
+                this.line(loc.x, loc.y, 500*Math.cos(an), 500*Math.sin(an), 8, Math.random()>0.5)
+                this.add(new Homer(loc.x, loc.y, 0, 0))
             }
 
         },
@@ -48,9 +59,22 @@ const balls = {
             const spacing = 6.28 / n
             for(var i = 0; i < n; i ++){
                 const an = spacing*i + Math.random()*0.1
-                balls.list.push(new Expirer(
+                balls.add(new Ball(
                     x,y,speed*Math.cos(an),speed*Math.sin(an)
-                ,400+Math.random()*300))
+                ))
+            }
+        },
+        line:function(x,y,dx,dy,n,seeking=false){
+            let idx = dx/n
+            let idy = dy/n
+            const speed = 2
+            const off = 3.14 * Math.random()
+            for(var i = 0; i < n; i ++){
+                const an = seeking ? Math.atan2(player.y-y-idy*i,player.x-x-idx*i) : 
+                Math.atan2(dy,dx) + off
+                balls.add(new Ball(
+                    x+idx*i,y+idy*i,speed*Math.cos(an),speed*Math.sin(an)
+                ))
             }
         }
 }
@@ -104,20 +128,20 @@ class Homer extends Ball {
     // render(){super.render()}
 }
 
-class Expirer extends Ball{
-    constructor(x,y,vx,vy,time){
-        super(x,y,vx,vy)
-        this.age = 0
-        this.lifetime = time
-    }
-    iterate(dtime){
-        super.iterate(dtime)
-        this.age+=dtime
-        if(this.age > this.lifetime){
-            this.destroy()
-        }
-    }
-    destroy(){
-        balls.list.splice(balls.list.indexOf(this), 1)
-    }
-}
+// class Expirer extends Ball{
+//     constructor(x,y,vx,vy,time){
+//         super(x,y,vx,vy)
+//         this.age = 0
+//         this.lifetime = time
+//     }
+//     iterate(dtime){
+//         super.iterate(dtime)
+//         this.age+=dtime
+//         if(this.age > this.lifetime){
+//             this.destroy()
+//         }
+//     }
+//     destroy(){
+//         balls.list.splice(balls.list.indexOf(this), 1)
+//     }
+// }
