@@ -33,6 +33,7 @@ const game = {
         }
         game.lastUpdate = Date.now()
         balls.iterate(dtime)
+        lasers.iterate(dtime)
         player.iterate(dtime)
         fx.iterate(dtime)
         game.render()
@@ -41,6 +42,7 @@ const game = {
         ctx.fillStyle="#ffffff66"
         ctx.fillRect(0,0,c.width,c.height)
         balls.render()
+        lasers.render()
         player.render()
         fx.render()
     } 

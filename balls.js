@@ -1,6 +1,6 @@
 const balls = {
         list:[],
-        limit:200,
+        limit:100,
         init:function(){
             balls.list = []
             for(var i = 0; i < this.limit; i ++){
