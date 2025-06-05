@@ -1,6 +1,6 @@
 const balls = {
         list:[],
-        limit:100,
+        limit:200,
         init:function(){
             balls.list = []
             for(var i = 0; i < this.limit; i ++){
@@ -37,7 +37,7 @@ const balls = {
                 balls.list[i].iterate(dtime)
             }
 
-            if(Math.random() < 0.1){
+            if(Math.random() < 0.2){
                 let loc = this.getvalidloc()
                 balls.add(new Ball(loc.x, loc.y, Math.random() * 3, Math.random()* 3))
             }

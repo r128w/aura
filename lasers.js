@@ -9,7 +9,7 @@ let lasers = {
 
         if(this.cooldown < 0){
             this.cooldown = 300 + Math.random()*1000
-            let type = Math.trunc(Math.random()*5)
+            let type = Math.trunc(Math.random()*6)
             let spacing = Math.random()*75 + 70
             switch(type){
                 case 0:
@@ -23,11 +23,15 @@ let lasers = {
                     this.laserY(spacing)
                     break
                 case 3:
-                    this.laserAngle(spacing*2, Math.random())
+                    this.laserAngle(spacing, Math.random())
                     break
                 case 4:
-                    this.laserAngle(spacing*2, Math.random())
+                    this.laserAngle(spacing, Math.random())
                     this.laserY(spacing)
+                    break
+                case 5:
+                    this.laserAngle(spacing, Math.random())
+                    this.laserX(spacing)
                     break
             }
         }
