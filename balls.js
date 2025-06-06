@@ -37,16 +37,16 @@ const balls = {
                 balls.list[i].iterate(dtime)
             }
 
-            if(Math.random() < 0.2){
+            if(Math.random() < 0.3){
                 let loc = this.getvalidloc()
                 balls.add(new Ball(loc.x, loc.y, Math.random() * 3, Math.random()* 3))
             }
 
-            if(Math.random()<0.01){
+            if(Math.random()<0.02){
                 let loc = this.getvalidloc()
                 this.burst(loc.x, loc.y, Math.trunc(5+Math.random()*10))
             }
-            if(Math.random() < 0.005){
+            if(Math.random() < 0.01){
                 let loc = this.getvalidloc()
                 const an = Math.atan2(player.y-loc.y, player.x-loc.x) + 1.57
                 this.line(loc.x, loc.y, 500*Math.cos(an), 500*Math.sin(an), 8, Math.random()>0.5)
