@@ -101,7 +101,7 @@ class Laser {
                     let x = (o.x-this.x) - ddot*(dx*distance)
                     let y = (o.y-this.y) - ddot*(dy*distance)
                     let magdist = Math.sqrt(x*x+y*y)
-                    if(magdist < 10){
+                    if(magdist < 10+player.r){
                         // damage
                         player.hit()
                     }
