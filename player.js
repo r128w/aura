@@ -5,6 +5,11 @@ const player = {
     hitTimer:0,
     aura:0,
     proximity:0,
+    addAura:function(amount){
+        this.aura+=amount
+        fx.add(new Num(amount, this.x, this.y))
+    },
+
     iterate:function(dtime){
         this.x+=this.vx*dtime
         this.y+=this.vy*dtime
@@ -55,9 +60,8 @@ const player = {
         if(this.proximity < 0){this.proximity = 0}
 
         if(this.proximity > 30){
-            this.aura += 10
+            this.addAura(10)
             this.proximity -= 10
-            fx.add(new Num(10, this.x, this.y))
         }
 
 
