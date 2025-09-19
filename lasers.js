@@ -86,7 +86,7 @@ class Laser {
     }
     iterate(dtime){
         this.age += dtime
-        if(this.age > this.timing.re){
+        if(this.age >= this.timing.re){
 
                 let dx = Math.cos(this.angle)
                 let dy = Math.sin(this.angle)
@@ -113,8 +113,7 @@ class Laser {
     }
     destroy(){
         lasers.list.splice(lasers.list.indexOf(this), 1)
-        player.aura+=2
-        fx.add(new Num(2, player.x, player.y))
+        player.addAura(2)
     }
     render(){
         ctx.strokeStyle = "#ff0000"
