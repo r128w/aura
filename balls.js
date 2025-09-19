@@ -105,6 +105,9 @@ class Ball {
         if(this.x < -this.r){this.destroy()}
         if(this.y > c.height + this.r){this.destroy()}
         if(this.y < -this.r){this.destroy()}
+
+        let dx = Math.abs(this.x-player.x)
+        let dy = Math.abs(this.y-player.y)
         
 
         if(Math.abs(this.x - player.x) < this.r + player.r){

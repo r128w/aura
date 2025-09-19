@@ -113,6 +113,8 @@ class Laser {
     }
     destroy(){
         lasers.list.splice(lasers.list.indexOf(this), 1)
+        player.aura+=2
+        fx.add(new Num(2, player.x, player.y))
     }
     render(){
         ctx.strokeStyle = "#ff0000"

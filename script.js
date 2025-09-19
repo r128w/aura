@@ -39,7 +39,7 @@ const game = {
         game.render()
     },
     render:function(){
-        ctx.fillStyle="#ffffff66"
+        ctx.fillStyle="#00000066"
         ctx.fillRect(0,0,c.width,c.height)
         balls.render()
         lasers.render()

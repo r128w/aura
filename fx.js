@@ -10,10 +10,22 @@ const fx = {
             fx.list[i].render()
         }
 
-
-        ctx.fillStyle = "#000000"
-        ctx.font="20px monospace"
-        ctx.fillText(Math.trunc(player.hitTimer/60), 20, 40)
+    },
+    add:function(fx){
+        if(fx instanceof Num){
+            for(var i = 0; i < this.list.length; i ++){
+                let oiq = this.list[i]
+                if((oiq.x-fx.x)*(oiq.x-fx.x)+(oiq.y-fx.y)*(oiq.y-fx.y)<800){
+                    oiq.n += fx.n
+                    oiq.x = fx.x + 10 * (Math.random()-0.5)
+                    oiq.y = fx.y + 10 * (Math.random()-0.5)
+                    oiq.vy = -4
+                    oiq.age = 0
+                    return
+                }
+            }
+        }
+        this.list.push(fx)
     }
 }
 
@@ -40,9 +52,11 @@ class Num {
         fx.list.splice(fx.list.indexOf(this), 1)
     }
     render(){
-        ctx.font="20px monospace"
+        if(Math.trunc(this.n)==0){return}
+        ctx.font="16px monospace"
+        ctx.textAlign='center'
         const d = Math.trunc((Math.random() + ((this.age/2 % 16) - 1))/1.5).toString(16)
-        ctx.fillStyle = `#ff${d+d}00`
-        ctx.fillText(Math.trunc(this.n), this.x, this.y)
+        ctx.fillStyle = this.n > 0 ?  `#44${d}fff` : `#ff${d+d}00`
+        ctx.fillText( (this.n > 0?"+":"") + Math.trunc(this.n) + " aura", this.x, this.y)
     }
 }
