@@ -50,6 +50,8 @@ const player = {
                 if(this.hitTimer > 10){
                     if(Math.abs(this.x-biq.x)>this.r+biq.r && Math.abs(this.y-biq.y)>this.r+biq.r){
                         this.proximity+=Math.pow(Math.abs(biq.vx-this.vx)+Math.abs(biq.vy-this.vy), 2)
+                        this.proximity+=0.2*Math.max(0,-Math.abs(this.vx)+5)
+                        this.proximity+=0.2*Math.max(0,-Math.abs(this.vy)+5)
                     }
                 }
             }
@@ -60,7 +62,7 @@ const player = {
         if(this.proximity < 0){this.proximity = 0}
 
         if(this.proximity > 30){
-            this.addAura(10)
+            this.addAura(2)
             this.proximity -= 10
         }
 

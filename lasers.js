@@ -113,7 +113,7 @@ class Laser {
     }
     destroy(){
         lasers.list.splice(lasers.list.indexOf(this), 1)
-        player.addAura(2)
+        player.addAura(1)
     }
     render(){
         ctx.strokeStyle = "#ff0000"
