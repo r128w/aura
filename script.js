@@ -28,7 +28,7 @@ const game = {
     lastUpdate:null,
     iterate:function(){
         let dtime
-        if(!game.lastUpdate){dtime = 0.016}else{
+        if(!game.lastUpdate){dtime = 1}else{
             dtime = 60*Math.min(Date.now()-game.lastUpdate,1000)/1000
         }
         game.lastUpdate = Date.now()

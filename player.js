@@ -4,6 +4,7 @@ const player = {
     input:{w:false,a:false,s:false,d:false},
     hitTimer:0,
     aura:0,
+    stillTimer:0,
     proximity:0,
     addAura:function(amount){
         this.aura+=amount
@@ -11,8 +12,19 @@ const player = {
     },
 
     iterate:function(dtime){
+        // console.log(dtime)
         this.x+=this.vx*dtime
         this.y+=this.vy*dtime
+
+        if(Math.abs(this.vx) < 0.2 && Math.abs(this.vy) < 0.2){
+            this.stillTimer+=dtime
+            if(this.stillTimer > 120){
+                if(this.stillTimer%60 < 1){
+                    this.addAura(3*Math.trunc(this.stillTimer/60))
+                }
+            }
+        }else{this.stillTimer=0}
+        
 
         this.hitTimer+=dtime
         this.aura += dtime/12; // 5 aura per second
@@ -86,6 +98,7 @@ const player = {
             fx.add(new Num(-this.aura, this.x, this.y))
         }
         this.hitTimer = 0
+        this.stillTimer = 0
         this.aura = 0
         this.proximity = 0
     }
