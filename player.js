@@ -18,9 +18,9 @@ const player = {
 
         if(Math.abs(this.vx) < 0.2 && Math.abs(this.vy) < 0.2){
             this.stillTimer+=dtime
-            if(this.stillTimer > 120){
-                if(this.stillTimer%60 < 1){
-                    this.addAura(3*Math.trunc(this.stillTimer/60))
+            if(this.stillTimer > 60){
+                if(this.stillTimer%30 < 1){
+                    this.addAura(3*Math.trunc(this.stillTimer/30))
                 }
             }
         }else{this.stillTimer=0}
