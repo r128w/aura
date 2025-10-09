@@ -6,6 +6,7 @@ const player = {
     aura:0,
     stillTimer:0,
     proximity:0,
+    init:function(){this.x = c.width/2; this.y = c.height/2},
     addAura:function(amount){
         this.aura+=amount
         fx.add(new Num(amount, this.x, this.y))

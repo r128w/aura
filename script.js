@@ -20,6 +20,7 @@ const game = {
         ctx.fillRect(0,0,c.width,c.height)
 
         balls.init()
+        player.init()
 
         iterator = setInterval(game.iterate, 16)
 
